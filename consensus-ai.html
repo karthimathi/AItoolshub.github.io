@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consensus AI: Complete Beginner Guide | AI-Powered Research & Evidence Analysis</title>
+    <meta name="description" content="Complete beginner guide to Consensus AI. Learn AI-powered research, evidence analysis, scientific literature review, and master academic AI tools from beginner to advanced.">
+    <meta name="keywords" content="Consensus AI, research AI, scientific literature, evidence analysis, academic research, AI paper analysis, research automation">
+    <meta name="author" content="Research AI Academy">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔬</text></svg>">
+    
+    <style>
+        /* ===== CSS RESET & BASE VARIABLES ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Research/Academic Theme Color Palette */
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --gradient-bg: linear-gradient(135deg, #0f172a 0%, #1e293b 40%, #312e81 80%, #0f172a 100%);
+            --card-bg: rgba(30, 41, 59, 0.92);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-highlight: rgba(255, 255, 255, 0.08);
+            
+            /* Research/Academic Accent Colors */
+            --accent-cyan: #22d3ee;
+            --accent-violet: #a78bfa;
+            --accent-blue: #60a5fa;
+            --highlight-yellow: #fbbf24;
+            
+            /* Text Colors */
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --quote-text: #e2e8f0;
+            
+            /* Research/Trust Effects */
+            --shadow-glow-cyan: 0 10px 40px rgba(34, 211, 238, 0.2);
+            --shadow-glow-violet: 0 10px 40px rgba(167, 139, 250, 0.15);
+            --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --border-radius: 20px;
+            --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            
+            /* Spacing */
+            --section-spacing: 7rem;
+            --card-spacing: 2rem;
+        }
+
+        /* ===== BASE STYLES ===== */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: var(--gradient-bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+            overflow-x: hidden;
+            background-attachment: fixed;
+            font-size: 16px;
+        }
+
+        /* ===== RESEARCH PATTERN BACKGROUND ===== */
+        .research-pattern {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+            pointer-events: none;
+            opacity: 0.1;
+        }
+
+        .pattern-line {
+            position: absolute;
+            background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+            opacity: 0.3;
+        }
+
+        .pattern-line.horizontal {
+            width: 100%;
+            height: 1px;
+            animation: pattern-scan-horizontal 30s linear infinite;
+        }
+
+        .pattern-line.vertical {
+            height: 100%;
+            width: 1px;
+            animation: pattern-scan-vertical 25s linear infinite;
+        }
+
+        @keyframes pattern-scan-horizontal {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+
+        @keyframes pattern-scan-vertical {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100vw); }
+        }
+
+        /* ===== CITATION MARKERS ===== */
+        .citation-marker {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--accent-violet);
+            border-radius: 50%;
+            animation: citation-pulse 4s ease-in-out infinite;
+            box-shadow: 0 0 20px var(--accent-violet);
+        }
+
+        @keyframes citation-pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.8); opacity: 1; }
+        }
+
+        /* ===== MAIN CONTAINER ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 4rem 1rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--accent-cyan) 0%, transparent 70%);
+            opacity: 0.05;
+            filter: blur(80px);
+            animation: research-glow 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes research-glow {
+            0% { opacity: 0.03; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0.08; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        .hero h1 {
+            font-size: clamp(3.2rem, 7vw, 5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-blue) 50%, var(--accent-violet) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 40px rgba(34, 211, 238, 0.2);
+            position: relative;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: fadeUp 1.2s ease 0.3s forwards;
+        }
+
+        .hero-tagline {
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            color: var(--text-secondary);
+            max-width: 900px;
+            margin: 0 auto 3rem;
+            font-weight: 300;
+            letter-spacing: 0.3px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1.2s ease 0.6s forwards;
+        }
+
+        /* ===== RESEARCH METRICS ===== */
+        .research-metrics {
+            display: flex;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            opacity: 0;
+            animation: fadeUp 1s ease 0.9s forwards;
+        }
+
+        .metric {
+            background: rgba(34, 211, 238, 0.1);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(34, 211, 238, 0.2);
+            text-align: center;
+            min-width: 160px;
+            transition: var(--transition-smooth);
+        }
+
+        .metric:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-violet);
+            background: rgba(167, 139, 250, 0.1);
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            display: block;
+            line-height: 1;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+        }
+
+        /* ===== SECTION STYLES ===== */
+        section {
+            margin-bottom: var(--section-spacing);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        section.animate-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== HEADINGS ===== */
+        h2 {
+            font-size: clamp(2.2rem, 5vw, 3.2rem);
+            font-weight: 700;
+            margin-bottom: 3.5rem;
+            position: relative;
+            display: inline-block;
+            color: var(--accent-cyan);
+        }
+
+        h2::before {
+            content: '🔍 ';
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-violet));
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 2.5rem 0 1.5rem;
+            color: var(--accent-violet);
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        h3::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+            font-weight: bold;
+        }
+
+        /* ===== GLASSMORPHISM CARDS ===== */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            margin-bottom: 2.5rem;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(34, 211, 238, 0.3);
+            box-shadow: var(--shadow-glow-cyan), var(--shadow-soft);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card.animate-in {
+            animation: slideIn 0.8s ease forwards;
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* ===== RESEARCH QUOTE STYLING ===== */
+        .research-quote {
+            background: rgba(30, 41, 59, 0.8);
+            border-left: 4px solid var(--accent-cyan);
+            border-radius: 8px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .research-quote::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 3rem;
+            color: var(--accent-violet);
+            opacity: 0.3;
+            font-family: serif;
+        }
+
+        .quote-text {
+            color: var(--quote-text);
+            font-style: italic;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== CITATION STYLING ===== */
+        .citation {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(167, 139, 250, 0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: var(--accent-violet);
+            margin: 0.2rem;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* ===== CONTENT STYLING ===== */
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 1.8rem;
+            font-size: 1.125rem;
+            line-height: 1.8;
+        }
+
+        .highlight {
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+
+        .emphasis {
+            color: var(--accent-violet);
+            font-weight: 500;
+        }
+
+        ul, ol {
+            padding-left: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        li {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            position: relative;
+            padding-left: 1.8rem;
+            line-height: 1.6;
+        }
+
+        li::before {
+            content: '→';
+            color: var(--accent-cyan);
+            position: absolute;
+            left: 0;
+            font-size: 1rem;
+            top: 0.2rem;
+        }
+
+        /* ===== SKILL LEVEL BADGES ===== */
+        .skill-level {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.7rem 1.5rem;
+            background: linear-gradient(90deg, 
+                rgba(34, 211, 238, 0.15), 
+                rgba(167, 139, 250, 0.15));
+            color: var(--accent-cyan);
+            border-radius: 6px;
+            font-weight: 600;
+            margin: 1.5rem 0 1rem;
+            font-size: 0.95rem;
+            border: 1px solid rgba(34, 211, 238, 0.2);
+            letter-spacing: 0.5px;
+        }
+
+        .skill-level::before {
+            content: '📚';
+            margin-right: 0.5rem;
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 2rem;
+            }
+            
+            .hero h1 {
+                font-size: clamp(2.8rem, 6vw, 4rem);
+            }
+            
+            .card {
+                padding: 2.5rem;
+            }
+            
+            .research-metrics {
+                gap: 1.5rem;
+            }
+            
+            .metric {
+                min-width: 140px;
+                padding: 0.8rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            :root {
+                --section-spacing: 5rem;
+            }
+            
+            .container {
+                padding: 0 1.5rem;
+            }
+            
+            .hero {
+                min-height: 90vh;
+                padding: 3rem 1rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero-tagline {
+                font-size: 1.4rem;
+                margin-bottom: 2.5rem;
+            }
+            
+            h2 {
+                font-size: 2.4rem;
+                margin-bottom: 2.5rem;
+            }
+            
+            .card {
+                padding: 2rem;
+                margin-bottom: 2rem;
+            }
+            
+            h3 {
+                font-size: 1.4rem;
+            }
+            
+            .research-metrics {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .metric {
+                width: 100%;
+                max-width: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 1.25rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-tagline {
+                font-size: 1.2rem;
+            }
+            
+            h2 {
+                font-size: 2rem;
+            }
+            
+            .card {
+                padding: 1.75rem;
+                border-radius: 16px;
+            }
+            
+            h3 {
+                font-size: 1.3rem;
+            }
+            
+            p, li {
+                font-size: 1rem;
+            }
+            
+            .skill-level {
+                padding: 0.5rem 1.2rem;
+                font-size: 0.9rem;
+            }
+            
+            .metric-value {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* ===== SCROLL INDICATOR ===== */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            opacity: 0;
+            animation: fadeUp 1s ease 1.2s forwards;
+        }
+
+        .scroll-indicator::after {
+            content: '';
+            width: 2px;
+            height: 50px;
+            background: linear-gradient(to bottom, var(--accent-cyan), var(--accent-violet), transparent);
+            animation: scroll-bounce 2s infinite;
+        }
+
+        @keyframes scroll-bounce {
+            0%, 100% { transform: translateY(0); opacity: 0.5; }
+            50% { transform: translateY(15px); opacity: 1; }
+        }
+
+        /* ===== ANIMATION UTILITIES ===== */
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 5rem 0 3rem;
+            color: var(--text-muted);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            margin-top: 4rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        footer p {
+            max-width: 600px;
+            margin: 0 auto;
+            color: var(--text-muted);
+        }
+
+        /* ===== REDUCED MOTION SUPPORT ===== */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            
+            html {
+                scroll-behavior: auto;
+            }
+            
+            .pattern-line,
+            .citation-marker {
+                animation: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Research Pattern Background -->
+    <div class="research-pattern">
+        <div class="pattern-line horizontal" style="top: 25%;"></div>
+        <div class="pattern-line horizontal" style="top: 50%;"></div>
+        <div class="pattern-line horizontal" style="top: 75%;"></div>
+        <div class="pattern-line vertical" style="left: 33%;"></div>
+        <div class="pattern-line vertical" style="left: 66%;"></div>
+        
+        <!-- Citation Markers -->
+        <div class="citation-marker" style="top: 30%; left: 20%;"></div>
+        <div class="citation-marker" style="top: 60%; left: 40%;"></div>
+        <div class="citation-marker" style="top: 40%; left: 70%;"></div>
+        <div class="citation-marker" style="top: 70%; left: 80%;"></div>
+    </div>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <header class="hero">
+            <h1>Consensus AI: Complete Beginner Guide</h1>
+            <p class="hero-tagline">Master AI-powered research, scientific literature analysis, and evidence-based decision making with Consensus AI's advanced research intelligence platform</p>
+            
+            <div class="research-metrics">
+                <div class="metric">
+                    <span class="metric-value">200M+</span>
+                    <span class="metric-label">Research Papers</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value">AI-Powered</span>
+                    <span class="metric-label">Evidence Analysis</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-value">Instant</span>
+                    <span class="metric-label">Research Synthesis</span>
+                </div>
+            </div>
+            
+            <div class="scroll-indicator">Explore Research</div>
+        </header>
+
+        <main>
+            <!-- Section 1: Introduction -->
+            <section id="introduction">
+                <h2>Introduction to Consensus AI</h2>
+                <div class="card">
+                    <p><span class="highlight">Consensus AI</span> is an advanced artificial intelligence platform specifically designed for research analysis and evidence synthesis. It serves as an intelligent research assistant that helps academics, students, professionals, and curious minds navigate the vast landscape of scientific literature to find trustworthy answers based on actual research evidence.</p>
+                    
+                    <div class="research-quote">
+                        <p class="quote-text">Consensus AI democratizes access to scientific knowledge by using AI to read, understand, and synthesize findings from millions of research papers, making evidence-based insights accessible to everyone.</p>
+                    </div>
+                    
+                    <p>Unlike general AI chatbots, Consensus AI is trained specifically on peer-reviewed academic literature and uses proprietary algorithms to identify consensus positions, methodological quality, and evidence strength across scientific studies. The platform provides citations and confidence levels for every answer, maintaining academic integrity and transparency.</p>
+                    
+                    <p>From medical professionals seeking treatment evidence to students writing research papers, Consensus AI bridges the gap between complex academic research and practical, actionable insights—all while maintaining the rigor and credibility of traditional academic research methods.</p>
+                </div>
+            </section>
+
+            <!-- Section 2: How to Use -->
+            <section id="how-to-use">
+                <h2>How to Use Consensus AI</h2>
+                <div class="card">
+                    <h3>Basic Research Queries</h3>
+                    <p>Start by asking research questions in natural language. Consensus AI understands questions about specific topics, relationships between concepts, treatment effectiveness, intervention outcomes, and methodological questions.</p>
+                    
+                    <h3>Question Formatting Best Practices</h3>
+                    <ul>
+                        <li>Ask specific, research-oriented questions</li>
+                        <li>Use academic terminology when appropriate</li>
+                        <li>Ask about relationships: "Does X affect Y?"</li>
+                        <li>Request evidence summaries: "What does research say about Z?"</li>
+                        <li>Ask for methodological guidance: "What are best practices for measuring A?"</li>
+                    </ul>
+                    
+                    <h3>Advanced Research Features</h3>
+                    <ul>
+                        <li>Filter results by study type, sample size, and publication date</li>
+                        <li>Request systematic review-style summaries</li>
+                        <li>Compare conflicting study findings</li>
+                        <li>Ask about research gaps and future directions</li>
+                        <li>Request citation export in various academic formats</li>
+                    </ul>
+                    
+                    <h3>Evidence Evaluation Tools</h3>
+                    <p>Consensus AI provides confidence scores, study quality indicators, consensus strength metrics, and identifies areas of research agreement vs. controversy. Use these tools to critically evaluate the evidence presented.</p>
+                </div>
+            </section>
+
+            <!-- Section 3: Applications -->
+            <section id="applications">
+                <h2>Applications You Can Develop Using Consensus AI</h2>
+                <div class="card">
+                    <h3>Academic & Educational Tools</h3>
+                    <ul>
+                        <li>Automated literature review assistants</li>
+                        <li>Research proposal development tools</li>
+                        <li>Academic writing and citation assistants</li>
+                        <li>Study design and methodology advisors</li>
+                        <li>Research gap identification systems</li>
+                    </ul>
+                    
+                    <h3>Healthcare & Medical Applications</h3>
+                    <ul>
+                        <li>Evidence-based clinical decision support tools</li>
+                        <li>Treatment effectiveness comparison systems</li>
+                        <li>Medical literature monitoring and alerting</li>
+                        <li>Patient education material generators</li>
+                        <li>Clinical guideline development assistants</li>
+                    </ul>
+                    
+                    <h3>Business & Professional Tools</h3>
+                    <ul>
+                        <li>Market research and competitive analysis tools</li>
+                        <li>Evidence-based policy development systems</li>
+                        <li>Professional development and continuing education</li>
+                        <li>Regulatory compliance research assistants</li>
+                        <li>Industry trend analysis and forecasting</li>
+                    </ul>
+                    
+                    <h3>Public Knowledge & Journalism</h3>
+                    <ul>
+                        <li>Fact-checking and misinformation detection</li>
+                        <li>Science journalism research assistants</li>
+                        <li>Public health communication tools</li>
+                        <li>Educational content development platforms</li>
+                        <li>Public policy research and analysis</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 4: Make Money -->
+            <section id="make-money">
+                <h2>How to Make Money with Consensus AI</h2>
+                <div class="card">
+                    <div class="skill-level">Research Services</div>
+                    <ul>
+                        <li>Offer professional literature review services</li>
+                        <li>Provide evidence synthesis for businesses and organizations</li>
+                        <li>Develop custom research reports for clients</li>
+                        <li>Offer academic editing and citation services</li>
+                        <li>Provide systematic review preparation assistance</li>
+                    </ul>
+                    
+                    <div class="skill-level">Educational Products</div>
+                    <ul>
+                        <li>Create Consensus AI training courses and workshops</li>
+                        <li>Develop academic writing guides and templates</li>
+                        <li>Offer research methodology consulting</li>
+                        <li>Create subject-specific research databases</li>
+                        <li>Develop citation management tools</li>
+                    </ul>
+                    
+                    <div class="skill-level">Content Creation</div>
+                    <ul>
+                        <li>Write evidence-based articles and blog posts</li>
+                        <li>Create research summary newsletters</li>
+                        <li>Develop educational YouTube content</li>
+                        <li>Write academic guides and how-to manuals</li>
+                        <li>Create industry research reports</li>
+                    </ul>
+                    
+                    <div class="skill-level">Software Development</div>
+                    <ul>
+                        <li>Develop Consensus AI integration tools</li>
+                        <li>Create research workflow automation systems</li>
+                        <li>Build academic writing assistants</li>
+                        <li>Develop specialized research databases</li>
+                        <li>Create citation analysis tools</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 5: Learning Guide -->
+            <section id="learning-guide">
+                <h2>Consensus AI Learning Guide (Beginner to Advanced)</h2>
+                <div class="card">
+                    <div class="skill-level">Beginner Level: Research Fundamentals</div>
+                    <h3>Basic Skills Development</h3>
+                    <ul>
+                        <li>Understanding research question formulation</li>
+                        <li>Basic search techniques and query optimization</li>
+                        <li>Interpreting confidence scores and evidence levels</li>
+                        <li>Basic citation management and referencing</li>
+                        <li>Understanding study types and research designs</li>
+                    </ul>
+                    
+                    <div class="skill-level">Intermediate Level: Proficient Usage</div>
+                    <h3>Advanced Research Techniques</h3>
+                    <ul>
+                        <li>Advanced filtering and evidence synthesis</li>
+                        <li>Critical appraisal of research quality</li>
+                        <li>Identifying research gaps and controversies</li>
+                        <li>Systematic approach to literature review</li>
+                        <li>Integrating findings across multiple studies</li>
+                    </ul>
+                    
+                    <div class="skill-level">Advanced Level: Expert Mastery</div>
+                    <h3>Professional Applications</h3>
+                    <ul>
+                        <li>Developing evidence-based guidelines and policies</li>
+                        <li>Teaching research methodology to others</li>
+                        <li>Advanced statistical interpretation</li>
+                        <li>Research synthesis for publication</li>
+                        <li>Developing custom research methodologies</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 6: Advantages -->
+            <section id="advantages">
+                <h2>Advantages of Consensus AI</h2>
+                <div class="card">
+                    <ul>
+                        <li><span class="highlight">Evidence-Based Answers:</span> All responses are grounded in actual research with citations</li>
+                        <li><span class="highlight">Transparent Methodology:</span> Clear confidence scores and evidence strength indicators</li>
+                        <li><span class="highlight">Academic Integrity:</span> Maintains research standards and citation practices</li>
+                        <li><span class="highlight">Time Efficiency:</span> Dramatically reduces literature review time from weeks to minutes</li>
+                        <li><span class="highlight">Comprehensive Coverage:</span> Access to 200M+ research papers across disciplines</li>
+                        <li><span class="highlight">Bias Reduction:</span> Systematic approach reduces selection and confirmation bias</li>
+                        <li><span class="highlight">Quality Filtering:</span> Prioritizes high-quality, peer-reviewed research</li>
+                        <li><span class="highlight">Accessibility:</span> Makes academic research accessible to non-specialists</li>
+                        <li><span class="highlight">Continuous Updates:</span> Regular addition of new research and features</li>
+                        <li><span class="highlight">Educational Value:</span> Teaches research methodology and critical thinking</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Section 7: Future -->
+            <section id="future">
+                <h2>Future of Consensus AI</h2>
+                <div class="card">
+                    <p>The evolution of Consensus AI points toward increasingly sophisticated research intelligence capabilities that will transform how knowledge is discovered, synthesized, and applied across all fields:</p>
+                    
+                    <h3>Technical Advancements</h3>
+                    <ul>
+                        <li>Real-time research monitoring and alerting systems</li>
+                        <li>Automated systematic review and meta-analysis generation</li>
+                        <li>Predictive analytics for research trends and breakthroughs</li>
+                        <li>Multimodal analysis combining text, data, and images</li>
+                        <li>Personalized research recommendation engines</li>
+                    </ul>
+                    
+                    <h3>Research Methodology Evolution</h3>
+                    <ul>
+                        <li>Automated research quality assessment at scale</li>
+                        <li>Real-time consensus tracking across research communities</li>
+                        <li>Automated hypothesis generation and testing frameworks</li>
+                        <li>Cross-disciplinary research synthesis tools</li>
+                        <li>Automated replication study identification</li>
+                    </ul>
+                    
+                    <h3>Knowledge Democratization</h3>
+                    <ul>
+                        <li>Making cutting-edge research accessible to broader audiences</li>
+                        <li>Bridging gaps between academic research and practical application</li>
+                        <li>Enhancing public understanding of complex scientific topics</li>
+                        <li>Supporting evidence-based decision making in all sectors</li>
+                        <li>Accelerating scientific progress through better knowledge synthesis</li>
+                    </ul>
+                    
+                    <div class="research-quote">
+                        <p class="quote-text">As Consensus AI evolves, it will increasingly serve as a bridge between specialized academic knowledge and practical application, accelerating evidence-based decision making across healthcare, policy, business, and everyday life.</p>
+                    </div>
+                    
+                    <p>The future of Consensus AI lies in creating a more transparent, accessible, and efficient research ecosystem where evidence-based insights are readily available to inform decisions at all levels—from individual health choices to global policy making.</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>© 2024 Research AI Academy. This educational guide covers Consensus AI fundamentals and research applications.</p>
+            <p style="margin-top: 1rem; font-size: 0.9rem; opacity: 0.7;">Consensus AI is a research intelligence platform. This content is for educational purposes only.</p>
+        </footer>
+    </div>
+
+    <!-- CSS Scroll Animation Implementation -->
+    <style>
+        /* Progressive enhancement for scroll animations */
+        @media (prefers-reduced-motion: no-preference) {
+            @keyframes revealContent {
+                from {
+                    opacity: 0;
+                    transform: translateY(50px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            @keyframes slideContent {
+                from {
+                    opacity: 0;
+                    transform: translateX(-30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+            
+            section {
+                animation: revealContent linear;
+                animation-timeline: view();
+                animation-range: entry 0% cover 25%;
+            }
+            
+            .card {
+                animation: slideContent linear;
+                animation-timeline: view();
+                animation-range: entry 10% cover 20%;
+            }
+        }
+    </style>
+</body>
+</html>
