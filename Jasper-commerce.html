@@ -191,6 +191,13 @@
             animation: fadeUp 1.2s ease 0.3s forwards;
         }
 
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .hero-tagline {
             font-size: clamp(1.3rem, 3vw, 1.8rem);
             color: var(--text-secondary);
@@ -250,11 +257,11 @@
         section {
             margin-bottom: var(--section-spacing);
             opacity: 0;
-            transform: translateY(50px);
+            transform: translateY(40px);
             transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
-        section.animate-in {
+        section.visible {
             opacity: 1;
             transform: translateY(0);
         }
@@ -315,7 +322,8 @@
             position: relative;
             overflow: hidden;
             opacity: 0;
-            transform: translateX(-30px);
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             border-left: 4px solid var(--accent-violet);
         }
 
@@ -331,6 +339,11 @@
             transition: opacity 0.3s ease;
         }
 
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         .card:hover {
             transform: translateY(-8px);
             border-color: rgba(139, 92, 246, 0.3);
@@ -339,17 +352,6 @@
 
         .card:hover::before {
             opacity: 1;
-        }
-
-        .card.animate-in {
-            animation: slideIn 0.8s ease forwards;
-        }
-
-        @keyframes slideIn {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
         }
 
         /* ===== PRODUCT CARD PREVIEW ===== */
@@ -593,14 +595,6 @@
             50% { transform: translateY(15px); opacity: 1; }
         }
 
-        /* ===== ANIMATION UTILITIES ===== */
-        @keyframes fadeUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         /* ===== FOOTER ===== */
         footer {
             text-align: center;
@@ -635,6 +629,16 @@
             .commerce-line,
             .cart-element {
                 animation: none !important;
+            }
+            
+            .card {
+                opacity: 1;
+                transform: none;
+            }
+            
+            section {
+                opacity: 1;
+                transform: none;
             }
         }
     </style>
@@ -917,44 +921,99 @@
         </footer>
     </div>
 
-    <!-- CSS Scroll Animation Implementation -->
-    <style>
-        /* Progressive enhancement for scroll animations */
-        @media (prefers-reduced-motion: no-preference) {
-            @keyframes revealContent {
-                from {
-                    opacity: 0;
-                    transform: translateY(50px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
+    <!-- JavaScript for Scroll Animations -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section');
+            const cards = document.querySelectorAll('.card');
+            
+            // Function to check if element is in viewport
+            function isInViewport(element) {
+                const rect = element.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                const threshold = 150; // Pixels from bottom to trigger animation
+                
+                return (
+                    rect.top <= windowHeight - threshold &&
+                    rect.bottom >= threshold
+                );
             }
             
-            @keyframes slideContent {
-                from {
-                    opacity: 0;
-                    transform: translateX(-30px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateX(0);
-                }
+            // Function to handle scroll animations
+            function handleScrollAnimations() {
+                sections.forEach(section => {
+                    if (isInViewport(section)) {
+                        section.classList.add('visible');
+                    }
+                });
+                
+                cards.forEach(card => {
+                    if (isInViewport(card)) {
+                        card.classList.add('visible');
+                    }
+                });
             }
             
-            section {
-                animation: revealContent linear;
-                animation-timeline: view();
-                animation-range: entry 0% cover 25%;
+            // Initial check on page load
+            handleScrollAnimations();
+            
+            // Throttle scroll event for performance
+            let ticking = false;
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    window.requestAnimationFrame(function() {
+                        handleScrollAnimations();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+            
+            // Check on window resize
+            window.addEventListener('resize', handleScrollAnimations);
+            
+            // Add interactive hover effects for cards
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    if (this.classList.contains('visible')) {
+                        this.style.transform = 'translateY(-8px)';
+                    }
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    if (this.classList.contains('visible')) {
+                        this.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+            
+            // Add animation to cart elements when in view
+            const cartElements = document.querySelectorAll('.cart-element');
+            
+            function animateCartElements() {
+                cartElements.forEach(element => {
+                    if (isInViewport(element)) {
+                        element.style.animationPlayState = 'running';
+                    }
+                });
             }
             
-            .card {
-                animation: slideContent linear;
-                animation-timeline: view();
-                animation-range: entry 10% cover 20%;
-            }
-        }
-    </style>
+            // Initial check for cart elements
+            animateCartElements();
+            window.addEventListener('scroll', animateCartElements);
+            
+            // Add hover effects for metrics
+            const metrics = document.querySelectorAll('.metric');
+            metrics.forEach(metric => {
+                metric.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                
+                metric.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
 </body>
 </html>
