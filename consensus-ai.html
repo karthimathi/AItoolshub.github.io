@@ -179,6 +179,13 @@
             animation: fadeUp 1.2s ease 0.3s forwards;
         }
 
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         .hero-tagline {
             font-size: clamp(1.3rem, 3vw, 1.8rem);
             color: var(--text-secondary);
@@ -238,11 +245,11 @@
         section {
             margin-bottom: var(--section-spacing);
             opacity: 0;
-            transform: translateY(50px);
+            transform: translateY(40px);
             transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
-        section.animate-in {
+        section.visible {
             opacity: 1;
             transform: translateY(0);
         }
@@ -303,7 +310,8 @@
             position: relative;
             overflow: hidden;
             opacity: 0;
-            transform: translateX(-30px);
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease, border-color 0.3s ease;
         }
 
         .card::before {
@@ -318,6 +326,11 @@
             transition: opacity 0.3s ease;
         }
 
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         .card:hover {
             transform: translateY(-8px);
             border-color: rgba(34, 211, 238, 0.3);
@@ -326,17 +339,6 @@
 
         .card:hover::before {
             opacity: 1;
-        }
-
-        .card.animate-in {
-            animation: slideIn 0.8s ease forwards;
-        }
-
-        @keyframes slideIn {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
         }
 
         /* ===== RESEARCH QUOTE STYLING ===== */
@@ -589,14 +591,6 @@
             50% { transform: translateY(15px); opacity: 1; }
         }
 
-        /* ===== ANIMATION UTILITIES ===== */
-        @keyframes fadeUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         /* ===== FOOTER ===== */
         footer {
             text-align: center;
@@ -631,6 +625,16 @@
             .pattern-line,
             .citation-marker {
                 animation: none !important;
+            }
+            
+            .card {
+                opacity: 1;
+                transform: none;
+            }
+            
+            section {
+                opacity: 1;
+                transform: none;
             }
         }
     </style>
@@ -909,44 +913,87 @@
         </footer>
     </div>
 
-    <!-- CSS Scroll Animation Implementation -->
-    <style>
-        /* Progressive enhancement for scroll animations */
-        @media (prefers-reduced-motion: no-preference) {
-            @keyframes revealContent {
-                from {
-                    opacity: 0;
-                    transform: translateY(50px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
+    <!-- JavaScript for Scroll Animations -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section');
+            const cards = document.querySelectorAll('.card');
+            
+            // Function to check if element is visible in viewport
+            function isElementVisible(element) {
+                const rect = element.getBoundingClientRect();
+                const windowHeight = window.innerHeight;
+                const threshold = 100; // Pixels from bottom of viewport
+                
+                return (
+                    rect.top <= windowHeight - threshold &&
+                    rect.bottom >= threshold
+                );
             }
             
-            @keyframes slideContent {
-                from {
-                    opacity: 0;
-                    transform: translateX(-30px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateX(0);
-                }
+            // Function to check visibility and add classes
+            function checkScroll() {
+                sections.forEach(section => {
+                    if (isElementVisible(section)) {
+                        section.classList.add('visible');
+                    }
+                });
+                
+                cards.forEach(card => {
+                    if (isElementVisible(card)) {
+                        card.classList.add('visible');
+                    }
+                });
             }
             
-            section {
-                animation: revealContent linear;
-                animation-timeline: view();
-                animation-range: entry 0% cover 25%;
+            // Check immediately on load
+            checkScroll();
+            
+            // Throttle scroll event for better performance
+            let isScrolling = false;
+            window.addEventListener('scroll', function() {
+                if (!isScrolling) {
+                    window.requestAnimationFrame(function() {
+                        checkScroll();
+                        isScrolling = false;
+                    });
+                    isScrolling = true;
+                }
+            });
+            
+            // Check on resize
+            window.addEventListener('resize', checkScroll);
+            
+            // Add interactive hover effects for cards
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    if (this.classList.contains('visible')) {
+                        this.style.transform = 'translateY(-8px)';
+                    }
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    if (this.classList.contains('visible')) {
+                        this.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+            
+            // Add animation to citation markers when in view
+            const citationMarkers = document.querySelectorAll('.citation-marker');
+            
+            function animateMarkers() {
+                citationMarkers.forEach(marker => {
+                    if (isElementVisible(marker)) {
+                        marker.style.animationPlayState = 'running';
+                    }
+                });
             }
             
-            .card {
-                animation: slideContent linear;
-                animation-timeline: view();
-                animation-range: entry 10% cover 20%;
-            }
-        }
-    </style>
+            // Initial marker animation check
+            animateMarkers();
+            window.addEventListener('scroll', animateMarkers);
+        });
+    </script>
 </body>
 </html>
