@@ -207,10 +207,9 @@
             background-clip: text;
             color: transparent;
             text-shadow: 0 0 60px rgba(0, 229, 255, 0.3);
-            animation: voice-glow 3s ease-in-out infinite alternate;
+            animation: voice-glow 3s ease-in-out infinite alternate, fadeUp 1.2s ease 0.3s forwards;
             opacity: 0;
             transform: translateY(40px);
-            animation: fadeUp 1.2s ease 0.3s forwards;
         }
 
         @keyframes voice-glow {
@@ -234,6 +233,13 @@
             opacity: 0;
             transform: translateY(30px);
             animation: fadeUp 1.2s ease 0.6s forwards;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* ===== VOICE WAVE INDICATOR ===== */
@@ -272,11 +278,11 @@
         section {
             margin-bottom: var(--section-spacing);
             opacity: 0;
-            transform: translateY(50px);
+            transform: translateY(40px);
             transition: opacity 0.8s ease, transform 0.8s ease;
         }
 
-        section.animate-in {
+        section.visible {
             opacity: 1;
             transform: translateY(0);
         }
@@ -343,7 +349,8 @@
             position: relative;
             overflow: hidden;
             opacity: 0;
-            transform: translateX(-30px);
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease, border-color 0.3s ease;
         }
 
         .card::before {
@@ -358,6 +365,11 @@
             transition: opacity 0.3s ease;
         }
 
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         .card:hover {
             transform: translateY(-8px);
             border-color: rgba(0, 229, 255, 0.3);
@@ -366,17 +378,6 @@
 
         .card:hover::before {
             opacity: 1;
-        }
-
-        .card.animate-in {
-            animation: slideIn 0.8s ease forwards;
-        }
-
-        @keyframes slideIn {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
         }
 
         /* ===== CONTENT STYLING ===== */
@@ -593,14 +594,6 @@
             50% { transform: translateY(15px); opacity: 1; }
         }
 
-        /* ===== ANIMATION UTILITIES ===== */
-        @keyframes fadeUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
         /* ===== FOOTER ===== */
         footer {
             text-align: center;
@@ -636,6 +629,16 @@
             .voice-bar,
             .voice-badge::before {
                 animation: none !important;
+            }
+            
+            .card {
+                opacity: 1;
+                transform: none;
+            }
+            
+            section {
+                opacity: 1;
+                transform: none;
             }
         }
     </style>
@@ -892,34 +895,86 @@
         </footer>
     </div>
 
-    <!-- CSS Scroll Animation Implementation -->
-    <style>
-        /* Progressive enhancement for scroll animations */
-        @media (prefers-reduced-motion: no-preference) {
-            /* Simple scroll animation using CSS @keyframes and @scroll-timeline */
-            @keyframes sectionReveal {
-                from {
-                    opacity: 0;
-                    transform: translateY(50px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
+    <!-- JavaScript for Scroll Animations -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('section');
+            const cards = document.querySelectorAll('.card');
+            
+            // Initial check for elements already in view
+            function checkVisibility() {
+                const windowHeight = window.innerHeight;
+                const windowTop = window.scrollY;
+                const windowBottom = windowTop + windowHeight;
+                
+                // Check sections
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionBottom = sectionTop + section.offsetHeight;
+                    
+                    if (sectionBottom >= windowTop + 100 && sectionTop <= windowBottom - 100) {
+                        section.classList.add('visible');
+                    }
+                });
+                
+                // Check cards
+                cards.forEach(card => {
+                    const cardTop = card.offsetTop;
+                    const cardBottom = cardTop + card.offsetHeight;
+                    
+                    if (cardBottom >= windowTop + 100 && cardTop <= windowBottom - 100) {
+                        card.classList.add('visible');
+                    }
+                });
             }
             
-            section {
-                animation: sectionReveal linear;
-                animation-timeline: view();
-                animation-range: entry 0% cover 30%;
-            }
+            // Initial check
+            checkVisibility();
             
-            .card {
-                animation: slideIn linear;
-                animation-timeline: view();
-                animation-range: entry 10% cover 25%;
-            }
-        }
-    </style>
+            // Check on scroll with throttling
+            let scrollTimeout;
+            window.addEventListener('scroll', function() {
+                if (!scrollTimeout) {
+                    scrollTimeout = setTimeout(function() {
+                        checkVisibility();
+                        scrollTimeout = null;
+                    }, 100);
+                }
+            });
+            
+            // Check on resize
+            window.addEventListener('resize', checkVisibility);
+            
+            // Smooth scroll for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href === '#') return;
+                    
+                    const target = document.querySelector(href);
+                    if (target) {
+                        e.preventDefault();
+                        window.scrollTo({
+                            top: target.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Add smooth hover effects for cards
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    if (this.classList.contains('visible')) {
+                        this.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
