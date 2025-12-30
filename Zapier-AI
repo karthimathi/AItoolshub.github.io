@@ -17,6 +17,14 @@
             box-sizing: border-box;
         }
 
+        /* Prevent text selection on interactive elements */
+        button, .scroll-indicator, .metric {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
         :root {
             /* Automation/Workflow Theme Color Palette */
             --bg-primary: #0f0a1a;
@@ -64,6 +72,13 @@
             overflow-x: hidden;
             background-attachment: fixed;
             font-size: 16px;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Prevent default anchor behavior for section IDs */
+        section {
+            position: relative;
+            z-index: 1;
         }
 
         /* ===== AUTOMATION PATTERN BACKGROUND ===== */
@@ -243,6 +258,7 @@
             text-align: center;
             min-width: 160px;
             transition: var(--transition-smooth);
+            cursor: pointer;
         }
 
         .metric:hover {
@@ -492,6 +508,58 @@
             margin-right: 0.5rem;
         }
 
+        /* ===== SCROLL INDICATOR FIX ===== */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            opacity: 0;
+            animation: fadeUp 1s ease 1.2s forwards;
+            cursor: pointer;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .scroll-indicator:hover {
+            color: var(--accent-cyan);
+            background: rgba(6, 182, 212, 0.1);
+        }
+
+        .scroll-indicator::after {
+            content: '';
+            width: 2px;
+            height: 50px;
+            background: linear-gradient(to bottom, var(--accent-orange), var(--accent-cyan), transparent);
+            animation: scroll-bounce 2s infinite;
+        }
+
+        @keyframes scroll-bounce {
+            0%, 100% { transform: translateY(0); opacity: 0.5; }
+            50% { transform: translateY(15px); opacity: 1; }
+        }
+
+        /* ===== NAVIGATION FIX ===== */
+        .navigation-fix {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            z-index: 1000;
+            pointer-events: none;
+        }
+
         /* ===== RESPONSIVE DESIGN ===== */
         @media (max-width: 1024px) {
             .container {
@@ -605,37 +673,6 @@
             }
         }
 
-        /* ===== SCROLL INDICATOR ===== */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 3rem;
-            left: 50%;
-            transform: translateX(-50%);
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-            opacity: 0;
-            animation: fadeUp 1s ease 1.2s forwards;
-        }
-
-        .scroll-indicator::after {
-            content: '';
-            width: 2px;
-            height: 50px;
-            background: linear-gradient(to bottom, var(--accent-orange), var(--accent-cyan), transparent);
-            animation: scroll-bounce 2s infinite;
-        }
-
-        @keyframes scroll-bounce {
-            0%, 100% { transform: translateY(0); opacity: 0.5; }
-            50% { transform: translateY(15px); opacity: 1; }
-        }
-
         /* ===== ANIMATION UTILITIES ===== */
         @keyframes fadeUp {
             to {
@@ -681,6 +718,43 @@
                 animation: none !important;
             }
         }
+
+        /* ===== CSS Scroll Animation Implementation ===== */
+        @media (prefers-reduced-motion: no-preference) {
+            @keyframes revealContent {
+                from {
+                    opacity: 0;
+                    transform: translateY(50px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            
+            @keyframes slideContent {
+                from {
+                    opacity: 0;
+                    transform: translateX(-30px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+            
+            section {
+                animation: revealContent linear;
+                animation-timeline: view();
+                animation-range: entry 0% cover 25%;
+            }
+            
+            .card {
+                animation: slideContent linear;
+                animation-timeline: view();
+                animation-range: entry 10% cover 20%;
+            }
+        }
     </style>
 </head>
 <body>
@@ -703,6 +777,9 @@
         <div class="workflow-arrow" style="top: 65%; animation-delay: 2s;">➔</div>
     </div>
 
+    <!-- Navigation Fix Layer -->
+    <div class="navigation-fix"></div>
+
     <div class="container">
         <!-- Hero Section -->
         <header class="hero">
@@ -710,22 +787,27 @@
             <p class="hero-tagline">Master AI-powered automation, workflow creation, and business process optimization with Zapier's intelligent no-code automation platform</p>
             
             <div class="automation-metrics">
-                <div class="metric">
+                <div class="metric" onclick="scrollToSection('introduction')">
                     <span class="metric-value">5,000+</span>
                     <span class="metric-label">App Integrations</span>
                 </div>
-                <div class="metric">
+                <div class="metric" onclick="scrollToSection('how-to-use')">
                     <span class="metric-value">AI-Powered</span>
                     <span class="metric-label">Automation</span>
                 </div>
-                <div class="metric">
+                <div class="metric" onclick="scrollToSection('applications')">
                     <span class="metric-value">No-Code</span>
                     <span class="metric-label">Workflows</span>
                 </div>
             </div>
             
-            <div class="scroll-indicator">Explore Automation</div>
+            <a href="#content-start" class="scroll-indicator" onclick="event.preventDefault(); scrollToSection('introduction')">
+                Explore Automation
+            </a>
         </header>
+
+        <!-- Content Anchor -->
+        <div id="content-start" style="position: absolute; top: 100vh; left: 0; width: 1px; height: 1px;"></div>
 
         <main>
             <!-- Section 1: Introduction -->
@@ -997,44 +1079,98 @@
         </footer>
     </div>
 
-    <!-- CSS Scroll Animation Implementation -->
-    <style>
-        /* Progressive enhancement for scroll animations */
-        @media (prefers-reduced-motion: no-preference) {
-            @keyframes revealContent {
-                from {
-                    opacity: 0;
-                    transform: translateY(50px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-            }
-            
-            @keyframes slideContent {
-                from {
-                    opacity: 0;
-                    transform: translateX(-30px);
-                }
-                to {
-                    opacity: 1;
-                    transform: translateX(0);
-                }
-            }
-            
-            section {
-                animation: revealContent linear;
-                animation-timeline: view();
-                animation-range: entry 0% cover 25%;
-            }
-            
-            .card {
-                animation: slideContent linear;
-                animation-timeline: view();
-                animation-range: entry 10% cover 20%;
+    <script>
+        // Smooth scroll function to prevent default anchor behavior
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                // Calculate offset for header
+                const headerHeight = 0; // No fixed header, adjust if needed
+                const sectionPosition = section.getBoundingClientRect().top + window.pageYOffset;
+                const offsetPosition = sectionPosition - headerHeight - 20;
+                
+                // Smooth scroll with requestAnimationFrame for better performance
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+                
+                // Prevent any default behavior
+                return false;
             }
         }
-    </style>
+
+        // Prevent any unintended behavior with section IDs
+        document.addEventListener('DOMContentLoaded', function() {
+            // Disable default click behavior on all section elements
+            const sections = document.querySelectorAll('section[id]');
+            sections.forEach(section => {
+                section.style.cursor = 'default';
+                
+                // Add click event to prevent any unintended behavior
+                section.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            });
+
+            // Handle metric clicks properly
+            const metrics = document.querySelectorAll('.metric');
+            metrics.forEach(metric => {
+                metric.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                });
+            });
+
+            // Handle scroll indicator click
+            const scrollIndicator = document.querySelector('.scroll-indicator');
+            if (scrollIndicator) {
+                scrollIndicator.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    scrollToSection('introduction');
+                });
+            }
+
+            // Fix for any hash in URL
+            if (window.location.hash) {
+                setTimeout(() => {
+                    window.scrollTo(0, 0);
+                    history.replaceState(null, null, ' ');
+                }, 100);
+            }
+
+            // Initialize animations on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                    }
+                });
+            }, observerOptions);
+
+            // Observe cards and sections
+            document.querySelectorAll('.card').forEach(card => observer.observe(card));
+            document.querySelectorAll('section').forEach(section => observer.observe(section));
+        });
+
+        // Prevent any unintended behavior on page load
+        window.addEventListener('load', function() {
+            // Clear any hash from URL
+            if (window.location.hash) {
+                history.replaceState(null, null, ' ');
+            }
+        });
+
+        // Handle any hash change attempts
+        window.addEventListener('hashchange', function(e) {
+            e.preventDefault();
+            history.replaceState(null, null, ' ');
+        });
+    </script>
 </body>
 </html>
