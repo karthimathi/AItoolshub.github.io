@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disclaimer | AI Tools Hub</title>
+    <meta name="description" content="Disclaimer for AI Tools Hub. Important legal information about the use of our AI tools, limitations, and user responsibilities.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #0ea5e9;
+            --primary-purple: #8b5cf6;
+            --primary-cyan: #06b6d4;
+            --dark-bg: #0f172a;
+            --darker-bg: #020617;
+            --glass-bg: rgba(30, 41, 59, 0.7);
+            --glass-border: rgba(148, 163, 184, 0.1);
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --warning-red: #ef4444;
+            --warning-orange: #f59e0b;
+            --caution-yellow: #eab308;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, var(--darker-bg) 0%, var(--dark-bg) 50%, #1e1b4b 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(239, 68, 68, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(245, 158, 11, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(14, 165, 233, 0.1) 0%, transparent 50%);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: 60px 0 40px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--warning-orange), var(--primary-blue), var(--primary-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            margin-bottom: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 300;
+            margin-bottom: 30px;
+        }
+
+        .page-title {
+            font-size: 3.5rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, var(--warning-orange), var(--primary-blue));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--warning-orange), var(--primary-blue));
+            border-radius: 2px;
+        }
+
+        /* Warning Banner */
+        .warning-banner {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(245, 158, 11, 0.2));
+            border: 2px solid var(--warning-red);
+            border-radius: 20px;
+            padding: 40px;
+            margin: 0 auto 50px;
+            text-align: center;
+            max-width: 900px;
+            animation: pulseWarning 2s infinite, fadeIn 1s ease-out 0.2s both;
+        }
+
+        @keyframes pulseWarning {
+            0%, 100% { border-color: var(--warning-red); }
+            50% { border-color: var(--warning-orange); }
+        }
+
+        .warning-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .warning-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--warning-red);
+            margin-bottom: 15px;
+        }
+
+        .warning-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+        }
+
+        /* Main Content */
+        main {
+            animation: slideUp 0.8s ease-out 0.3s both;
+        }
+
+        .last-updated {
+            text-align: center;
+            color: var(--warning-orange);
+            font-size: 0.9rem;
+            margin-bottom: 40px;
+            padding: 10px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Disclaimer Cards */
+        .disclaimer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .disclaimer-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+
+        .disclaimer-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--warning-orange), var(--caution-yellow));
+        }
+
+        .disclaimer-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(245, 158, 11, 0.3);
+            box-shadow: 0 20px 40px var(--shadow-color);
+        }
+
+        .disclaimer-card.warning {
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+
+        .disclaimer-card.warning::before {
+            background: linear-gradient(90deg, var(--warning-red), var(--warning-orange));
+        }
+
+        .disclaimer-card.caution {
+            border-color: rgba(234, 179, 8, 0.3);
+        }
+
+        .disclaimer-card.caution::before {
+            background: linear-gradient(90deg, var(--caution-yellow), var(--warning-orange));
+        }
+
+        .card-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--warning-orange), var(--warning-red));
+            color: white;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .disclaimer-card.caution .card-icon {
+            background: linear-gradient(135deg, var(--caution-yellow), var(--warning-orange));
+        }
+
+        .disclaimer-card.warning .card-icon {
+            background: linear-gradient(135deg, var(--warning-red), #dc2626);
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .card-content {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .card-content p {
+            margin-bottom: 15px;
+        }
+
+        .card-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Limitations Table */
+        .limitations-table-container {
+            overflow-x: auto;
+            margin: 50px 0;
+            animation: fadeIn 1s ease-out 0.5s both;
+        }
+
+        .limitations-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+        }
+
+        .limitations-table th {
+            background: linear-gradient(90deg, var(--warning-red), var(--warning-orange));
+            color: white;
+            text-align: left;
+            padding: 20px;
+            font-weight: 600;
+        }
+
+        .limitations-table td {
+            padding: 20px;
+            border-bottom: 1px solid var(--glass-border);
+            color: var(--text-secondary);
+        }
+
+        .limitations-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .limitations-table tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .risk-level {
+            display: inline-block;
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-right: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .level-high {
+            background: rgba(239, 68, 68, 0.2);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .level-medium {
+            background: rgba(245, 158, 11, 0.2);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .level-low {
+            background: rgba(34, 197, 94, 0.2);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        /* User Responsibilities */
+        .responsibilities-section {
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(139, 92, 246, 0.1));
+            border-radius: 20px;
+            padding: 40px;
+            margin: 50px 0;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        .responsibilities-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--text-primary);
+        }
+
+        .responsibilities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .responsibility-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .responsibility-icon {
+            color: var(--primary-cyan);
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 60px;
+            animation: fadeIn 1s ease-out 0.7s both;
+        }
+
+        .contact-title {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, var(--warning-orange), var(--primary-purple));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--warning-orange), var(--primary-purple));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            animation: fadeIn 1s ease-out 0.8s both;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--warning-orange);
+        }
+
+        .copyright {
+            margin-top: 20px;
+            opacity: 0.7;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+            
+            .warning-banner {
+                padding: 30px 20px;
+                margin-bottom: 30px;
+            }
+            
+            .warning-title {
+                font-size: 1.8rem;
+            }
+            
+            .disclaimer-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .disclaimer-card {
+                padding: 25px;
+            }
+            
+            .responsibilities-section {
+                padding: 30px 20px;
+            }
+            
+            .contact-section {
+                padding: 30px 20px;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 20px;
+            }
+            
+            body {
+                padding: 15px;
+            }
+            
+            .limitations-table th,
+            .limitations-table td {
+                padding: 15px 10px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .logo {
+                font-size: 2rem;
+            }
+            
+            .card-title {
+                font-size: 1.3rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .responsibilities-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .warning-icon {
+                font-size: 2rem;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white !important;
+                color: black !important;
+            }
+            
+            .disclaimer-card {
+                break-inside: avoid;
+                border: 1px solid #ddd !important;
+                background: white !important;
+            }
+            
+            .page-title, .card-title {
+                color: black !important;
+                background: none !important;
+            }
+            
+            .warning-banner {
+                border: 2px solid black !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="logo">AI Tools Hub</h1>
+            <p class="logo-subtitle">Advanced AI Solutions for the Future</p>
+            <h2 class="page-title">Legal Disclaimer</h2>
+        </header>
+
+        <div class="warning-banner">
+            <span class="warning-icon">⚠️</span>
+            <h3 class="warning-title">IMPORTANT LEGAL NOTICE</h3>
+            <p class="warning-subtitle">Please read this disclaimer carefully before using any AI tools on our platform. By using our services, you acknowledge and agree to the terms outlined below.</p>
+        </div>
+
+        <main>
+            <div class="last-updated">
+                Last Updated: December 2024 | Version: 1.2
+            </div>
+
+            <div class="disclaimer-grid">
+                <section class="disclaimer-card warning">
+                    <div class="card-icon">⚖️</div>
+                    <h3 class="card-title">No Legal Advice</h3>
+                    <div class="card-content">
+                        <p><strong>The content generated by our AI tools does not constitute legal, financial, medical, or professional advice of any kind.</strong> All outputs should be reviewed and verified by qualified professionals before being relied upon.</p>
+                        <p>AI-generated legal documents, financial advice, medical information, or other professional content are provided for informational purposes only and should not be considered a substitute for professional consultation.</p>
+                    </div>
+                </section>
+
+                <section class="disclaimer-card warning">
+                    <div class="card-icon">🎯</div>
+                    <h3 class="card-title">Accuracy & Reliability</h3>
+                    <div class="card-content">
+                        <p><strong>AI-generated content may contain inaccuracies, biases, or errors.</strong> While we strive to provide accurate and reliable AI tools, we cannot guarantee the completeness, accuracy, or timeliness of any generated content.</p>
+                        <p>AI models can produce "hallucinations" - convincing but incorrect information. Always verify critical information from multiple authoritative sources before making decisions based on AI-generated content.</p>
+                    </div>
+                </section>
+
+                <section class="disclaimer-card caution">
+                    <div class="card-icon">⚠️</div>
+                    <h3 class="card-title">Limitation of Liability</h3>
+                    <div class="card-content">
+                        <p><strong>To the fullest extent permitted by law, AI Tools Hub shall not be liable for any direct, indirect, incidental, special, consequential, or punitive damages resulting from your use of our AI tools.</strong></p>
+                        <p>This includes, but is not limited to, damages for loss of profits, data, business opportunities, or personal injury arising from the use or inability to use our services, even if we have been advised of the possibility of such damages.</p>
+                    </div>
+                </section>
+
+                <section class="disclaimer-card">
+                    <div class="card-icon">🔒</div>
+                    <h3 class="card-title">Data Security & Privacy</h3>
+                    <div class="card-content">
+                        <p><strong>Do not submit sensitive, confidential, or personally identifiable information to our AI tools unless explicitly permitted.</strong> While we implement security measures, we cannot guarantee the absolute security of data transmitted to or from our platform.</p>
+                        <p>AI interactions may be logged for improvement purposes. Review our Privacy Policy for details on how we handle your data. You are responsible for complying with data protection regulations when using our tools.</p>
+                    </div>
+                </section>
+
+                <section class="disclaimer-card caution">
+                    <div class="card-icon">⚡</div>
+                    <h3 class="card-title">Service Availability</h3>
+                    <div class="card-content">
+                        <p><strong>Our AI tools are provided on an "as-is" and "as-available" basis.</strong> We do not guarantee uninterrupted, timely, secure, or error-free operation of our services.</p>
+                        <p>We reserve the right to modify, suspend, or discontinue any part of our services at any time without prior notice. We are not liable for any loss or damage resulting from service interruptions, downtime, or technical issues.</p>
+                    </div>
+                </section>
+
+                <section class="disclaimer-card">
+                    <div class="card-icon">📝</div>
+                    <h3 class="card-title">Intellectual Property</h3>
+                    <div class="card-content">
+                        <p><strong>You retain ownership of your input prompts, but grant us a license to use them for service improvement.</strong> AI-generated outputs may be subject to copyright and other intellectual property considerations.</p>
+                        <p>Some AI models have specific licensing requirements for generated content. You are responsible for understanding and complying with these requirements. We are not liable for any copyright infringement resulting from your use of generated content.</p>
+                    </div>
+                </section>
+            </div>
+
+            <div class="limitations-table-container">
+                <h3 style="font-size: 1.8rem; margin-bottom: 20px; color: var(--text-primary); text-align: center;">Risk Assessment & Limitations</h3>
+                <table class="limitations-table">
+                    <thead>
+                        <tr>
+                            <th>Area of Use</th>
+                            <th>Risk Level</th>
+                            <th>Key Limitations</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Legal Documents & Advice</td>
+                            <td><span class="risk-level level-high">High Risk</span></td>
+                            <td>May not reflect current laws; lacks legal expertise; not substitute for attorney review</td>
+                        </tr>
+                        <tr>
+                            <td>Medical & Health Information</td>
+                            <td><span class="risk-level level-high">High Risk</span></td>
+                            <td>Not medical advice; may contain inaccuracies; cannot diagnose conditions</td>
+                        </tr>
+                        <tr>
+                            <td>Financial Analysis & Advice</td>
+                            <td><span class="risk-level level-high">High Risk</span></td>
+                            <td>Market predictions unreliable; not personalized financial advice; past performance not indicative</td>
+                        </tr>
+                        <tr>
+                            <td>Academic & Research Writing</td>
+                            <td><span class="risk-level level-medium">Medium Risk</span></td>
+                            <td>May include factual errors; potential plagiarism issues; requires human verification</td>
+                        </tr>
+                        <tr>
+                            <td>Creative Content Generation</td>
+                            <td><span class="risk-level level-low">Low Risk</span></td>
+                            <td>May include biases; quality varies; copyright considerations apply</td>
+                        </tr>
+                        <tr>
+                            <td>Code & Technical Solutions</td>
+                            <td><span class="risk-level level-medium">Medium Risk</span></td>
+                            <td>May contain security vulnerabilities; requires testing and review; not production-ready</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <section class="responsibilities-section">
+                <h3 class="responsibilities-title">Your Responsibilities</h3>
+                <div class="responsibilities-grid">
+                    <div class="responsibility-item">
+                        <div class="responsibility-icon">✓</div>
+                        <div>
+                            <strong>Due Diligence</strong>
+                            <p>Verify all AI-generated information from authoritative sources before use</p>
+                        </div>
+                    </div>
+                    <div class="responsibility-item">
+                        <div class="responsibility-icon">✓</div>
+                        <div>
+                            <strong>Professional Consultation</strong>
+                            <p>Seek expert advice for legal, medical, financial, or other professional matters</p>
+                        </div>
+                    </div>
+                    <div class="responsibility-item">
+                        <div class="responsibility-icon">✓</div>
+                        <div>
+                            <strong>Ethical Use</strong>
+                            <p>Do not use AI tools for illegal, harmful, or unethical purposes</p>
+                        </div>
+                    </div>
+                    <div class="responsibility-item">
+                        <div class="responsibility-icon">✓</div>
+                        <div>
+                            <strong>Data Privacy</strong>
+                            <p>Do not submit sensitive personal or confidential information</p>
+                        </div>
+                    </div>
+                    <div class="responsibility-item">
+                        <div class="responsibility-icon">✓</div>
+                        <div>
+                            <strong>Compliance</strong>
+                            <p>Ensure compliance with applicable laws and regulations in your jurisdiction</p>
+                        </div>
+                    </div>
+                    <div class="responsibility-item">
+                        <div class="responsibility-icon">✓</div>
+                        <div>
+                            <strong>Attribution</strong>
+                            <p>Properly attribute AI-generated content when required</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="contact-section">
+                <h3 class="contact-title">Legal Inquiries & Support</h3>
+                <p>For legal questions or to report concerns about our AI tools, please contact:</p>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">⚖️</div>
+                        <div>
+                            <strong>Legal Department</strong>
+                            <p>legal@aitoolshub.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">📋</div>
+                        <div>
+                            <strong>Compliance Office</strong>
+                            <p>compliance@aitoolshub.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">🌐</div>
+                        <div>
+                            <strong>Report Issues</strong>
+                            <p>www.aitoolshub.com/report</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <p style="margin-top: 30px; color: var(--warning-orange); font-weight: 500;">
+                    <strong>Emergency Legal Notice:</strong> For urgent legal matters, please contact us immediately. Do not rely on AI-generated content for time-sensitive legal decisions.
+                </p>
+            </section>
+        </main>
+
+        <footer>
+            <div class="footer-links">
+                <a href="/terms">Terms & Conditions</a>
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/acceptable-use">Acceptable Use Policy</a>
+                <a href="/contact">Contact Us</a>
+                <a href="/ai-ethics">AI Ethics Statement</a>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2024 AI Tools Hub. All rights reserved.<br>
+                This Disclaimer is a legal document. By using our services, you acknowledge that you have read, understood, and agree to be bound by these terms.
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
